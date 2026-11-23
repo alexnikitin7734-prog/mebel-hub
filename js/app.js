@@ -16,24 +16,23 @@
   var TICK = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>';
   var PLUS = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
   var DEL = '<svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"><path d="M6 6l12 12M18 6L6 18"/></svg>';
-  var SVG = function (d) { return '<svg width="22" height="22" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round">' + d + '</svg>'; };
 
   // Калькулятор: позиции и цены состояний — с карточек сайта (docs/build_data.py → MBL_CALC). Нормы — отраслевые, из старого лендинга мебели (README, «Вопросы»).
   var CALC = window.MBL_CALC || {};
   var FORMATS = {
-    konf: { name: 'Конференция', icon: SVG('<path d="M4 20v-3h16v3M6 17v-4h12v4"/><circle cx="12" cy="6" r="2.5"/>'),
+    konf: { name: 'Конференция',
       set: [{ id: 97228, per: 1 }, { id: 103574, fixed: 2, note: 'президиум' }, { id: 70372, per: 150, note: 'регистрация' }] },
-    banket: { name: 'Банкет', icon: SVG('<ellipse cx="12" cy="10" rx="8" ry="3"/><path d="M12 13v7M8 20h8"/>'),
+    banket: { name: 'Банкет',
       set: [{ id: 103565, per: 10 }, { id: 67242, per: 1 }] },
-    furshet: { name: 'Фуршет', icon: SVG('<circle cx="12" cy="5" r="3"/><path d="M12 8v13M8 21h8"/>'),
+    furshet: { name: 'Фуршет',
       set: [{ id: 105852, per: 4 }, { id: 103574, per: 20, note: 'линия раздачи' }] },
-    launzh: { name: 'Лаунж', icon: SVG('<path d="M4 18v-6a2 2 0 0 1 4 0v2h8v-2a2 2 0 0 1 4 0v6zM6 18v2M18 18v2M8 14V9a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v5"/>'),
+    launzh: { name: 'Лаунж',
       // мягкие места на треть гостей: группа = двухместный диван и два кресла (4 места)
       set: [{ id: 69780, group: 1 }, { id: 69811, group: 2 }] }
   };
   var ADDS = [
-    { key: 'resepshn', id: 70372, name: 'Стойка регистрации', not: 'konf', icon: SVG('<path d="M3 11h18v9H3zM6 11V7h12v4"/>') },
-    { key: 'garderob', id: 80711, name: 'Выездной гардероб', icon: SVG('<path d="M12 6a2 2 0 1 1 2 2c-1 0-2 .6-2 1.5V10l9 6H3l9-6"/>') }
+    { key: 'resepshn', id: 70372, name: 'Стойка регистрации', not: 'konf', img: 'img/razdely/resepshn.webp' },
+    { key: 'garderob', id: 80711, name: 'Выездной гардероб', img: 'img/razdely/garderob.webp' }
   ];
   // Состояние — как на карточках: под скатерть и чехлы / прокатный / как новый. «В текстиле» — технический со скатертью, чехлом или подушкой, где есть.
   var TIERS = [
@@ -99,7 +98,7 @@
 
   function renderFormats() {
     $('[data-fmt-seg]').innerHTML = Object.keys(FORMATS).map(function (k) {
-      return '<button type="button" data-fmt-set="' + k + '" class="' + (k === state.fmt ? 'is-on' : '') + '"><span class="mbl-seg__ic">' + FORMATS[k].icon + '</span>' + FORMATS[k].name + '</button>';
+      return '<button type="button" class="ktg-group' + (k === state.fmt ? ' is-on' : '') + '" data-fmt-set="' + k + '"><img src="' + LP + 'img/formaty/' + k + '.webp" alt=""><b>' + FORMATS[k].name + '</b></button>';
     }).join('');
     $('[data-tiers]').innerHTML = TIERS.map(function (t) {
       var sum = calcTotal(calcRows(state.fmt, state.guests, t.key, state.adds));
@@ -108,7 +107,7 @@
     }).join('');
     $('[data-adds]').innerHTML = ADDS.filter(function (a) { return a.not !== state.fmt; }).map(function (a) {
       var c = CALC[a.id];
-      return '<div role="button" tabindex="0" class="ktg-add mbl-add' + (state.adds[a.key] ? ' is-on' : '') + '" data-add="' + a.key + '"><span class="mbl-seg__ic">' + a.icon + '</span>' + a.name + '<small>' + (c.t.length ? '' : 'от ') + rub(price(a.id, state.tier)[0]) + '</small></div>';
+      return '<button type="button" class="ktg-group' + (state.adds[a.key] ? ' is-on' : '') + '" data-add="' + a.key + '"><img src="' + LP + a.img + '" alt=""><b>' + a.name + '</b><small>' + (c.t.length ? '' : 'от ') + rub(price(a.id, state.tier)[0]) + '</small></button>';
     }).join('');
   }
 
@@ -307,7 +306,6 @@
     if (t.matches('[data-open-drawer]')) { renderDrawer(); open($('[data-drawer]')); return; }
     if (t.matches('[data-close]')) { closeAll(); return; }
   });
-  root.addEventListener('keydown', function (e) { if ((e.key === 'Enter' || e.key === ' ') && e.target.matches('[data-add]')) { e.preventDefault(); e.target.click(); } });
   overlay.addEventListener('click', closeAll);
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape') closeAll();

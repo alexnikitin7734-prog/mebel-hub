@@ -2,8 +2,8 @@
 .mbl-tiers .ktg-tier b{font-size:16px;padding-right:24px}
 .mbl-tiers .ktg-tier__price{font-size:20px}
 .mbl-tiers .ktg-tier__out{font-size:13px;line-height:18px}
-.ktg-root .mbl-seg__ic{width:36px;height:36px;border-radius:50%;display:flex;align-items:center;justify-content:center;flex:none;background:var(--ktg-icon-bg);color:var(--ktg-accent)}
-.mbl-add small{margin-left:4px;font-size:13px;color:var(--ktg-text-2)}
+.mbl-tiles{display:grid;grid-template-columns:repeat(4,minmax(0,1fr));gap:12px}
+.ktg-format__img{background:#E4E4E4}
 .mbl-rows{gap:12px}
 .ktg-root .mbl-row{display:grid;grid-template-columns:40px minmax(0,1fr) auto;gap:10px;align-items:center}
 .mbl-row img{width:40px;height:40px;border-radius:8px;object-fit:cover;background:#fff}
@@ -34,6 +34,10 @@
 }
 
 @media (max-width:767px){
+  .mbl-tiles{gap:8px}
+  .mbl-tiles .ktg-group{padding:6px 4px 8px}
+  .mbl-tiles .ktg-group b{font-size:11px;line-height:14px}
+  .mbl-tiles .ktg-group small{font-size:11px}
   .mbl-tiers{grid-template-columns:repeat(2,minmax(0,1fr))}
   .mbl-tiers .ktg-tier b{font-size:15px}
   .mbl-tiers .ktg-tier{padding:12px}
