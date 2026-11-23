@@ -11,7 +11,7 @@
     if (v && typeof v === 'object') Object.keys(v).forEach(function (k) { v[k] = lpFix(v[k]); });
     return v;
   }
-  if (LP) ['KTG_DATA'].forEach(function (k) { lpFix(window[k]); });
+  if (LP) ['KTG_DATA', 'MBL_CALC'].forEach(function (k) { lpFix(window[k]); });
   var SITE = 'https://arenda-attrakcionov.ru';
   var TICK = '<svg width="12" height="12" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="3" stroke-linecap="round" stroke-linejoin="round"><path d="M5 12l5 5 9-10"/></svg>';
   var PLUS = '<svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><path d="M12 5v14M5 12h14"/></svg>';
