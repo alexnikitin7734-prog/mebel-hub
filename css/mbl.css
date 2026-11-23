@@ -43,9 +43,9 @@
 
 @media (max-width:767px){
   .mbl-tiles{grid-template-columns:repeat(2,minmax(0,1fr));gap:8px}
-  .ktg-root .mbl-tiles .ktg-group{grid-template-columns:52px minmax(0,1fr);column-gap:10px;padding:6px}
-  .mbl-tiles .ktg-group img{width:52px;height:52px}
-  .mbl-tiles .ktg-group b{font-size:13px;line-height:17px}
+  .ktg-root .mbl-tiles .ktg-group{grid-template-columns:44px minmax(0,1fr);column-gap:8px;padding:6px}
+  .mbl-tiles .ktg-group img{width:44px;height:44px}
+  .mbl-tiles .ktg-group b{font-size:12px;line-height:16px;overflow-wrap:anywhere}
   .mbl-tiles .ktg-group small{font-size:12px}
   .mbl-tiers{grid-template-columns:repeat(2,minmax(0,1fr))}
   .mbl-tiers .ktg-tier b{font-size:15px}
