@@ -20,6 +20,19 @@
 .mbl-q i{font-style:normal;min-width:24px;text-align:center;font-size:14px;font-weight:600}
 .ktg-root .ktg-dl{align-items:start}
 
+@media (min-width:1024px){
+  .ktg-root .ktg-crumbs{padding-top:12px}
+  .ktg-root .ktg-hero{padding:12px 0 32px}
+  .ktg-root .ktg-hero__text{padding:32px 40px}
+  .ktg-root .ktg-eyebrow{margin-bottom:14px}
+  .ktg-root .ktg-hero h1{font-size:38px;line-height:44px;margin-bottom:12px}
+  .ktg-root .ktg-hero__lead{font-size:16px;line-height:24px;margin-bottom:20px}
+  .ktg-root .ktg-hero__actions{margin-bottom:22px}
+  .ktg-root .ktg-facts{padding-top:16px}
+  .ktg-root .ktg-fact b{font-size:22px;line-height:28px}
+  .ktg-root .ktg-hero__photo{min-height:0}
+}
+
 @media (max-width:767px){
   .mbl-tiers{grid-template-columns:repeat(2,minmax(0,1fr))}
   .mbl-tiers .ktg-tier b{font-size:15px}
